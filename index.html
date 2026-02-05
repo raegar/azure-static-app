@@ -1,21 +1,29 @@
 <!DOCTYPE html>
-
-<html>
-
+<html lang="en">
 <head>
-
-  <title>My First Azure App</title>
-
+  <meta charset="UTF-8">
+  <title>Random Quote App</title>
 </head>
-
 <body>
 
-  <h1>Hello Azure</h1>
+  <h1>Random Quote</h1>
 
-  <p>This site is deployed using CI/CD.</p>
-  <p>It can automatically update!</p>
-  <p>See, it works!</p>
+  <p id="quote">Click the button to load a quote</p>
+
+  <button id="loadQuoteBtn">Get Quote</button>
+
+  <script>
+    async function loadQuote() {
+      const response = await fetch("/api/quotes");
+      const data = await response.json();
+
+      document.getElementById("quote").innerText = data.quote;
+    }
+
+    document
+      .getElementById("loadQuoteBtn")
+      .addEventListener("click", loadQuote);
+  </script>
 
 </body>
-
 </html>
